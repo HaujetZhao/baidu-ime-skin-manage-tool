@@ -59,7 +59,7 @@ class Dialog_RestoreSkin(QDialog):
                                    QMessageBox.Cancel)
         if 确认恢复 != QMessageBox.Yes:
             return False
-        subprocess.run(备份命令)
+        subprocess.run(备份命令, startupinfo=常量.subprocessStartUpInfo)
         self.close()
 
     def 取消(self):

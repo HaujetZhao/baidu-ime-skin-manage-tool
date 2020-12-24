@@ -29,8 +29,12 @@ class Thread_ExtractAllSkin(QThread):
         self.状态栏消息.emit('正在提取', 2000)
         提取皮肤命令 = f'adb pull /sdcard/baidu/ime/skins "{常量.皮肤输出路径}"'
         print(f'提取命令：{提取皮肤命令}')
-        subprocess.run(提取皮肤命令)
+        subprocess.run(提取皮肤命令, startupinfo=常量.subprocessStartUpInfo)
         提取出的皮肤所在目录 = os.path.join(常量.皮肤输出路径, 'skins')
+        if not os.path.exists(提取出的皮肤所在目录):
+            self.状态栏消息.emit('提取失败，控制台可查看详情', 3000)
+            self.正在运行 = 0
+            return
         with os.scandir(提取出的皮肤所在目录) as 目录条目:
             for entry in 目录条目:
                 if entry.name.endswith('.bds') and entry.is_file():

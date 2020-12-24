@@ -1,4 +1,5 @@
 import os, sys, subprocess
+from moduels.component.NormalValue import 常量
 
 def pngquant压缩图片(文件夹):
     """
@@ -12,7 +13,7 @@ def pngquant压缩图片(文件夹):
         for file in file_names:
             print(f'正在 pngquant 压缩图片：{file}')
             文件内容 = open(file, 'rb').read()
-            pngquant进程 = subprocess.Popen(f'pngquant - > "{file}"', stdin=subprocess.PIPE, shell=True)
+            pngquant进程 = subprocess.Popen(f'pngquant - > "{file}"', stdin=subprocess.PIPE, shell=True, startupinfo=常量.subprocessStartUpInfo)
             pngquant进程.communicate(文件内容)
 
 def optipng压缩图片(文件夹):
@@ -25,4 +26,4 @@ def optipng压缩图片(文件夹):
         file_names = map(lambda 子文件名: os.path.join(文件夹路径, 子文件名), file_names)
         for file in file_names:
             print(f'正在 optipng 压缩图片：{file}')
-            subprocess.run(f'optipng -quiet "{file}"')
+            subprocess.run(f'optipng -quiet "{file}"', startupinfo=常量.subprocessStartUpInfo)

@@ -87,14 +87,14 @@ class Thread_GenerateSkins(QThread):
         压缩命令 = f'''winrar a -afzip -ibck -r -ep1 "{输出皮肤文件完整路径}" "{压缩输入}"'''
         if os.path.exists(输出皮肤文件完整路径) and os.path.isfile(输出皮肤文件完整路径):
             os.remove(输出皮肤文件完整路径)
-        subprocess.run(压缩命令)
+        subprocess.run(压缩命令, startupinfo=常量.subprocessStartUpInfo)
         if self.发送到手机:
             皮肤文件名 = os.path.basename(输出皮肤文件完整路径)
             手机皮肤路径 = '/sdcard/baidu/ime/skins/' + 输出文件名 + 输出文件后缀名
             发送皮肤命令 = f'''adb push "{输出皮肤文件完整路径}" "{手机皮肤路径}"'''
-            subprocess.run(发送皮肤命令)
+            subprocess.run(发送皮肤命令, startupinfo=常量.subprocessStartUpInfo)
             安装皮肤命令 = f'''adb shell am start -a android.intent.action.VIEW -c android.intent.category.DEFAULT -n com.baidu.input/com.baidu.input.ImeUpdateActivity -d '{手机皮肤路径}' '''
-            subprocess.run(安装皮肤命令)
+            subprocess.run(安装皮肤命令, startupinfo=常量.subprocessStartUpInfo)
 
         # 输出文件完整路径
         pass

@@ -39,8 +39,8 @@ class NormalValue():
 
     图标路径 = 'misc/icon.icns' if 系统平台 == 'Darwin' else 'misc/icon.ico'
 
+    subprocessStartUpInfo = subprocess.STARTUPINFO()
     if 系统平台 == 'Windows':
-        subprocessStartUpInfo = subprocess.STARTUPINFO()
         subprocessStartUpInfo.dwFlags = subprocess.STARTF_USESHOWWINDOW
         subprocessStartUpInfo.wShowWindow = subprocess.SW_HIDE
     else:

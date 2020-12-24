@@ -233,9 +233,9 @@ class Tab_PerfectSkin(QWidget):
         皮肤文件名 = os.path.basename(获得的皮肤路径)
         手机皮肤路径 = '/sdcard/baidu/ime/skins/' + 皮肤文件名
         发送皮肤命令 = f'''adb push "{获得的皮肤路径}" "{手机皮肤路径}"'''
-        subprocess.run(发送皮肤命令)
+        subprocess.run(发送皮肤命令, startupinfo=常量.subprocessStartUpInfo)
         安装皮肤命令 = f'''adb shell am start -a android.intent.action.VIEW -c android.intent.category.DEFAULT -n com.baidu.input/com.baidu.input.ImeUpdateActivity -d '{手机皮肤路径}' '''
-        subprocess.run(安装皮肤命令)
+        subprocess.run(安装皮肤命令, startupinfo=常量.subprocessStartUpInfo)
 
 
     def 备份选中皮肤(self):
@@ -249,7 +249,7 @@ class Tab_PerfectSkin(QWidget):
         备份文件完整路径 = os.path.join(常量.皮肤输出路径, '皮肤备份文件', 备份压缩文件名)
         备份命令 = f'''winrar a -afzip -ibck -r -ep1 "{备份文件完整路径}" "{皮肤源文件目录}/*"'''
         if not os.path.exists(os.path.dirname(备份文件完整路径)): os.makedirs(os.path.dirname(备份文件完整路径))
-        subprocess.run(备份命令)
+        subprocess.run(备份命令, startupinfo=常量.subprocessStartUpInfo)
         os.startfile(os.path.dirname(备份文件完整路径))
 
 
