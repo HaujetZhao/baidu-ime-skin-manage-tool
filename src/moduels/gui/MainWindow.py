@@ -6,7 +6,7 @@ from PySide2.QtGui import *
 
 
 from moduels.component.NormalValue import 常量, 线程值
-from moduels.component.Stream import Stream
+
 from moduels.gui.Tab_PerfectSkin import Tab_PerfectSkin
 from moduels.gui.Tab_Config import Tab_Config
 from moduels.gui.Tab_Help import Tab_Help
@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
         self.打印输出标签页 = Tab_Stdout()
         self.帮助标签页 = Tab_Help()
 
-        self.标准输出流 = Stream()
+
 
         # self.consoleTab = ConsoleTab() # 新的控制台输出 tab
         # self.helpTab = HelpTab()  # 帮助
@@ -53,7 +53,7 @@ class MainWindow(QMainWindow):
 
 
     def initSlots(self):
-        self.标准输出流.newText.connect(self.更新控制台输出)
+
         pass
 
 
@@ -70,9 +70,8 @@ class MainWindow(QMainWindow):
         # self.setGeometry(QStyle(Qt.LeftToRight, Qt.AlignCenter, self.size(), QApplication.desktop().availableGeometry()))
         图标路径 = 'misc/icon.icns' if 常量.系统平台 == 'Darwin' else 'misc/icon.ico'
         self.setWindowIcon(QIcon(图标路径))
-        self.setWindowTitle('百度手机输入法皮肤辅助管理工具  作者：淳帅二代')
+        self.setWindowTitle('Baidu IME 皮肤管理工具')
 
-        sys.stdout = self.标准输出流
         常量.状态栏 = self.状态栏
         self.show()
 
@@ -82,8 +81,7 @@ class MainWindow(QMainWindow):
         rectangle.moveCenter(center)
         self.move(rectangle.topLeft())
 
-    def 更新控制台输出(self, text):
-        self.打印输出标签页.print(text)
+
 
     def loadStyleSheet(self):
         try:
