@@ -72,8 +72,11 @@ class Thread_GenerateSkins(QThread):
             self.发送到手机 = False
             压缩输入 = self.临时skin目录
         print('复制文件到临时 skin 目录')
-        if os.path.exists(self.临时skin目录): shutil.rmtree(self.临时skin目录)
-        shutil.copytree(皮肤源文件目录, self.临时skin目录)
+        try:
+            if os.path.exists(self.临时skin目录): shutil.rmtree(self.临时skin目录)
+            shutil.copytree(皮肤源文件目录, self.临时skin目录)
+        except:
+            print(f'''无法将皮肤源目录：\n    {皮肤源文件目录}\n复制到：\n    {self.临时skin目录}''')
         if self.图片压缩 == 1:
             print('开始无损压缩')
             optipng压缩图片(self.临时skin目录)
@@ -86,15 +89,20 @@ class Thread_GenerateSkins(QThread):
         输出皮肤文件完整路径 = os.path.join(self.皮肤输出路径, 输出文件名 + 输出文件后缀名)
         压缩命令 = f'''winrar a -afzip -ibck -r -ep1 "{输出皮肤文件完整路径}" "{压缩输入}"'''
         if os.path.exists(输出皮肤文件完整路径) and os.path.isfile(输出皮肤文件完整路径):
-            os.remove(输出皮肤文件完整路径)
+            try:
+                os.remove(输出皮肤文件完整路径)
+            except:
+                print(f'无法删除已存在的旧皮肤：\n    {输出皮肤文件完整路径}')
         subprocess.run(压缩命令, startupinfo=常量.subprocessStartUpInfo)
         if self.发送到手机:
             皮肤文件名 = os.path.basename(输出皮肤文件完整路径)
             手机皮肤路径 = '/sdcard/baidu/ime/skins/' + 输出文件名 + 输出文件后缀名
             发送皮肤命令 = f'''adb push "{输出皮肤文件完整路径}" "{手机皮肤路径}"'''
-            subprocess.run(发送皮肤命令, startupinfo=常量.subprocessStartUpInfo)
+            print(f'''正在推送皮肤文件 {皮肤文件名} 到手机：{发送皮肤命令}''')
+            print(subprocess.run(发送皮肤命令, startupinfo=常量.subprocessStartUpInfo, capture_output=True, encoding='utf-8').stdout)
             安装皮肤命令 = f'''adb shell am start -a android.intent.action.VIEW -c android.intent.category.DEFAULT -n com.baidu.input/com.baidu.input.ImeUpdateActivity -d '{手机皮肤路径}' '''
-            subprocess.run(安装皮肤命令, startupinfo=常量.subprocessStartUpInfo)
+            print('正在向手机发送安装皮肤的命令')
+            subprocess.run(安装皮肤命令, startupinfo=常量.subprocessStartUpInfo, capture_output=True, encoding='utf-8')
 
         # 输出文件完整路径
         pass

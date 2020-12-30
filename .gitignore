@@ -1,8 +1,8 @@
 *.db
 *.spec
 __pycache__
-dist*
-build*
+*/dist/*
+*/build/*
 TEMP*
 text.py
 out
@@ -16,11 +16,11 @@ README.html
 *.wav
 .DS_Store
 .idea
-*build
-*dist
 *info
 *.afphoto
-打包*
 *output
 *skinSource
 *database.db
+*视频封面*
+*.bdi
+*.bds

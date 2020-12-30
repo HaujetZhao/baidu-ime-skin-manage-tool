@@ -29,7 +29,7 @@ class Tab_Help(QWidget):
     def initSlots(self):
         self.打开帮助按钮.clicked.connect(self.openHelpDocument)
         self.ffmpegMannualNoteButton.clicked.connect(lambda: webbrowser.open(self.tr(r'https://hacpai.com/article/1595480295489')))
-        self.openVideoHelpButtone.clicked.connect(lambda: webbrowser.open(self.tr(r'https://www.bilibili.com/video/BV18T4y1E7FF/')))
+        self.openVideoHelpButtone.clicked.connect(lambda: webbrowser.open(self.tr(r'https://www.bilibili.com/video/av330760252')))
         self.openGiteePage.clicked.connect(lambda: webbrowser.open(self.tr(r'https://gitee.com/haujet/baidu-ime-skin-manage-tool/releases')))
         self.openGithubPage.clicked.connect(lambda: webbrowser.open(self.tr(r'https://github.com/HaujetZhao/baidu-ime-skin-manage-tool/releases')))
         self.linkToDiscussPage.clicked.connect(lambda: webbrowser.open(
@@ -38,9 +38,9 @@ class Tab_Help(QWidget):
 
     def initLayout(self):
         self.setLayout(self.masterLayout)
-        self.masterLayout.addWidget(self.打开帮助按钮)
+        # self.masterLayout.addWidget(self.打开帮助按钮)
         # self.masterLayout.addWidget(self.ffmpegMannualNoteButton)
-        # self.masterLayout.addWidget(self.openVideoHelpButtone)
+        self.masterLayout.addWidget(self.openVideoHelpButtone)
         self.masterLayout.addWidget(self.openGiteePage)
         self.masterLayout.addWidget(self.openGithubPage)
         self.masterLayout.addWidget(self.linkToDiscussPage)

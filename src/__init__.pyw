@@ -25,7 +25,13 @@ def 要退出了():
     print('退出')
 
 def main():
+    os.environ['QT_SCALE_FACTOR'] = '1'
+    # os.environ['QT_AUTO_SCREEN_SCALE_FACTOR'] = 'True'
+    # qtconf = os.path.join('qt', 'qt.conf')
+    # sys.argv += ["-qtconf", qtconf]
     app = QApplication(sys.argv)
+    app.setAttribute(Qt.AA_EnableHighDpiScaling)
+    QCoreApplication.instance().setAttribute(Qt.AA_UseHighDpiPixmaps)
     # app.aboutToQuit.connect(要退出了)
     createDB()
     mainWindow = MainWindow()

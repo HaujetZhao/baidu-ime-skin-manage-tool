@@ -1,12 +1,11 @@
 # -*- coding: UTF-8 -*-
-import sys
+
 
 from PySide2.QtWidgets import *
 from PySide2.QtGui import *
 from PySide2.QtCore import *
 
 from moduels.component.QEditBox_StdoutBox import QEditBox_StdoutBox
-from moduels.component.Stream import Stream
 from moduels.component.NormalValue import 常量
 
 
@@ -19,13 +18,12 @@ class Tab_Stdout(QWidget):
         self.initValues()  # 再定义各个控件的值
 
     def initElements(self):
-        self.标准输出流 = Stream()
+
         self.标准输出框 = QEditBox_StdoutBox()
         self.主布局 = QVBoxLayout()
         pass
 
     def initSlots(self):
-        self.标准输出流.newText.connect(self.更新控制台输出)
         pass
 
     def initLayouts(self):
@@ -34,11 +32,8 @@ class Tab_Stdout(QWidget):
 
     def initValues(self):
         # 常量.控制台标签页 = self
-        sys.stdout = self.标准输出流
-        pass
+        ...
 
-    def 更新控制台输出(self, text):
-        self.标准输出框.print(text)
 
 
 

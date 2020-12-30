@@ -7,9 +7,9 @@ def wirelessAdb():
     adb端口 = 5555
 
     print('先断开所有 adb 连接')
-    subprocess.run('adb disconnect', capture_output=True, startupinfo=常量.subprocessStartUpInfo)
+    print(subprocess.run('adb disconnect', startupinfo=常量.subprocessStartUpInfo, capture_output=True, encoding='utf-8').stdout)
 
-    Shell查找手机IP命令 = 'adb shell "ip address | grep inet | grep -v inet6 | grep -v 127"'
+    Shell查找手机IP命令 = r'adb shell "ip address | grep inet | grep wlan | grep -v inet6 | grep -v 127\.0\.0\.1"'
     for 尝试序号 in range(重试次数):
         shell查找ip = subprocess.run(Shell查找手机IP命令, capture_output=True, encoding='utf-8', startupinfo=常量.subprocessStartUpInfo).stdout
         if not shell查找ip:
@@ -33,7 +33,7 @@ def wirelessAdb():
         break
     手机在Wifi下的IP = re.search(r'\d+\.\d+\.\d+\.\d+', shell查找ip).group(0)
     print(f'得到手机的wifi下的ip为：{手机在Wifi下的IP}')
-    subprocess.run(f'adb tcpip {adb端口}', capture_output=True) # 打开端口
+    subprocess.run(f'adb tcpip {adb端口}', capture_output=True, startupinfo=常量.subprocessStartUpInfo) # 打开端口
     adb连接返回 = subprocess.run(f'adb connect {手机在Wifi下的IP}:{adb端口}', capture_output=True, encoding='utf-8', startupinfo=常量.subprocessStartUpInfo) # 连接
     if re.match('^connected', adb连接返回.stdout):
         print(f'连接成功：{adb连接返回.stdout}')

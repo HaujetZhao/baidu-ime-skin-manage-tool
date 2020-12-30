@@ -37,9 +37,9 @@ class Tab_PerfectSkin(QWidget):
         self.初始化中部部件()
         self.两个分区Box横向布局 = QHBoxLayout()
 
-        self.无线adb线程 = Thread_WirelessAdb()
-        self.生成皮肤线程 = Thread_GenerateSkins(self.皮肤列表Box.列表)
-        self.提取皮肤线程 = Thread_ExtractAllSkin()
+        self.无线adb线程 = Thread_WirelessAdb(self)
+        self.生成皮肤线程 = Thread_GenerateSkins(self.皮肤列表Box.列表, self)
+        self.提取皮肤线程 = Thread_ExtractAllSkin(self)
 
     def initLayouts(self):
         self.setLayout(self.两个分区Box横向布局)
