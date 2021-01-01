@@ -9,6 +9,7 @@ from moduels.component.NormalValue import 线程值
 
 from moduels.function.wirelessAdb import wirelessAdb
 from moduels.function.compressImages import optipng压缩图片, pngquant压缩图片
+from moduels.function.package import zip, unzip
 
 import time, sqlite3, os, shutil, re, subprocess
 
@@ -67,7 +68,7 @@ class Thread_GenerateSkins(QThread):
             {'皮肤名字': 皮肤名字}).fetchone()
         if self.输出格式 == 0:
             输出文件后缀名 = '.bds'
-            压缩输入 = (self.临时skin目录 + '/*').replace('\\', '/')
+            压缩输入 = (self.临时skin目录 + '/')
         elif self.输出格式 == 1:
             输出文件后缀名 = '.bdi'
             self.发送到手机 = False
@@ -88,13 +89,13 @@ class Thread_GenerateSkins(QThread):
             print('开始清理注释')
             self.清理注释(self.临时skin目录, '.ini')
         输出皮肤文件完整路径 = os.path.join(self.皮肤输出路径, 输出文件名 + 输出文件后缀名)
-        压缩命令 = f'''winrar a -afzip -ibck -r -ep1 "{输出皮肤文件完整路径}" "{压缩输入}"'''
+        # 压缩命令 = f'''winrar a -afzip -ibck -r -ep1 "{输出皮肤文件完整路径}" "{压缩输入}"'''
         if os.path.exists(输出皮肤文件完整路径) and os.path.isfile(输出皮肤文件完整路径):
             try:
                 os.remove(输出皮肤文件完整路径)
             except:
                 print(f'无法删除已存在的旧皮肤：\n    {输出皮肤文件完整路径}')
-        subprocess.run(压缩命令, startupinfo=常量.subprocessStartUpInfo)
+        zip(压缩输入, 输出皮肤文件完整路径)
         if self.发送到手机:
             皮肤文件名 = os.path.basename(输出皮肤文件完整路径)
             手机皮肤路径 = '/sdcard/baidu/ime/skins/' + 输出文件名 + 输出文件后缀名

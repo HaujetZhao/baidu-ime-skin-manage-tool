@@ -5,6 +5,7 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 from moduels.component.NormalValue import 常量
 from moduels.component.HBox_SelectPath import HBox_SelectPath
+from moduels.function.package import zip, unzip
 
 import os, subprocess
 
@@ -54,12 +55,12 @@ class Dialog_RestoreSkin(QDialog):
 
     def 确认(self):
         if self.备份文件列表.currentRow() < 0: return
-        备份命令 = f'''winrar x -afzip -ibck -y "{os.path.join(self.备份文件夹路径, self.备份文件列表.currentItem().text())}" "{self.皮肤源文件目录}"'''
+        # 备份命令 = f'''winrar x -afzip -ibck -y "{os.path.join(self.备份文件夹路径, self.备份文件列表.currentItem().text())}" "{self.皮肤源文件目录}"'''
         确认恢复 = QMessageBox.warning(self, '确认恢复', f'恢复将会使用 “{self.备份文件列表.currentItem().text()}” 文件的内容覆盖当前的皮肤源文件，当真要恢复？', QMessageBox.Yes | QMessageBox.Cancel,
                                    QMessageBox.Cancel)
         if 确认恢复 != QMessageBox.Yes:
             return False
-        subprocess.run(备份命令, startupinfo=常量.subprocessStartUpInfo)
+        unzip(os.path.join(self.备份文件夹路径, self.备份文件列表.currentItem().text()), self.皮肤源文件目录)
         self.close()
 
     def 取消(self):

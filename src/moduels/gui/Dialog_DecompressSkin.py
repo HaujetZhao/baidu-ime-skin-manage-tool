@@ -5,6 +5,7 @@ from PySide2.QtGui import *
 from PySide2.QtCore import *
 from moduels.component.NormalValue import 常量
 from moduels.component.HBox_SelectPath import HBox_SelectPath
+from moduels.function.package import zip, unzip
 
 import os, subprocess
 
@@ -49,7 +50,8 @@ class Dialog_DecompressSkin(QDialog):
     def 确认(self):
         皮肤路径 = self.皮肤路径_HBox.路径输入框.text()
         解压目录 = self.解压目录_HBox.路径输入框.text()
-        subprocess.run(f'''winrar x -afzip -ibck -y "{皮肤路径}" "{解压目录 + '/'}"''', startupinfo=常量.subprocessStartUpInfo)
+        unzip(皮肤路径, 解压目录)
+        # subprocess.run(f'''winrar x -afzip -ibck -y "{皮肤路径}" "{解压目录 + '/'}"''', startupinfo=常量.subprocessStartUpInfo)
         os.startfile(解压目录)
         self.close()
 
