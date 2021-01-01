@@ -17,6 +17,7 @@ class Group_PathSetting(QGroupBox):
         self.表单布局 = QFormLayout()
         self.皮肤输出路径输入框 = QLEdit_FilePathQLineEdit()
         self.音效文件路径输入框 = QLEdit_FilePathQLineEdit()
+        self.皮肤源文件默认父路径输入框 = QLEdit_FilePathQLineEdit()
 
     def initSlots(self):
         pass
@@ -27,6 +28,7 @@ class Group_PathSetting(QGroupBox):
         self.setLayout(self.表单布局)
         self.表单布局.addRow('皮肤输出路径：', self.皮肤输出路径输入框)
         # self.表单布局.addRow('音效文件路径：', self.音效文件路径输入框)
+        self.表单布局.addRow('解包默认父路径：', self.皮肤源文件默认父路径输入框)
 
 
     def initValues(self):

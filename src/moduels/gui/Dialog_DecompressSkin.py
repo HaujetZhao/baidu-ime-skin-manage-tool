@@ -21,7 +21,7 @@ class Dialog_DecompressSkin(QDialog):
         self.表单布局 = QFormLayout()
 
         self.皮肤路径_HBox = HBox_SelectPath(按钮文字='打开', 标题='打开皮肤', 选择类型=0, 起始目录=常量.皮肤输出路径, 过滤器='皮肤文件 (*.bds *.bds)')
-        self.解压目录_HBox = HBox_SelectPath(按钮文字='保存', 标题='选择解压路径', 选择类型=1, 起始目录=常量.皮肤输出路径, 过滤器='所有目录 (*)')
+        self.解压目录_HBox = HBox_SelectPath(按钮文字='保存', 标题='选择解压路径', 选择类型=1, 起始目录=常量.皮肤仓库路径, 过滤器='所有目录 (*)')
 
         self.确认按钮 = QPushButton('确认')
         self.取消按钮 = QPushButton('取消')
