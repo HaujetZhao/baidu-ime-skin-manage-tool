@@ -24,7 +24,7 @@ class Dialog_AddSkin(QDialog):
 
         self.皮肤名字_输入框 = QLineEdit()
         self.输出文件名_输入框 = QLineEdit()
-        self.皮肤路径_HBox = HBox_SelectPath(按钮文字='选择', 标题='选择目录', 选择类型=1, 起始目录='.', 过滤器='所有目录 (*)')
+        self.皮肤路径_HBox = HBox_SelectPath(按钮文字='选择', 标题='选择目录', 选择类型=1, 起始目录=常量.源文件默认父路径, 过滤器='所有目录 (*)')
         self.皮肤路径_输入框 = self.皮肤路径_HBox.路径输入框
 
         self.确认按钮 = QPushButton('确认')
