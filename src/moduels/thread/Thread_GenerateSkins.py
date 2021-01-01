@@ -16,6 +16,7 @@ class Thread_GenerateSkins(QThread):
 
     是否要全部生成 = False
     完成信号 = Signal()
+    状态栏消息 = Signal(str, int)
 
     def __init__(self, 列表, parent=None):
         super().__init__(parent)

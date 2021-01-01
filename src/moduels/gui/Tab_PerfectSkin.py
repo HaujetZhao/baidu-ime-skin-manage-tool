@@ -191,7 +191,9 @@ class Tab_PerfectSkin(QWidget):
         self.打包所有皮肤_按钮.clicked.connect(self.打包所有皮肤)
 
         self.生成皮肤线程.完成信号.connect(self.生成皮肤线程完成)
+        self.无线adb线程.状态栏消息.connect(lambda 消息, 时间: 常量.状态栏.showMessage(消息, 时间))
         self.提取皮肤线程.状态栏消息.connect(lambda 消息, 时间: 常量.状态栏.showMessage(消息, 时间))
+        self.生成皮肤线程.状态栏消息.connect(lambda 消息, 时间: 常量.状态栏.showMessage(消息, 时间))
         pass
 
     def 为输出选项按钮设置id和slot(self):
