@@ -249,9 +249,10 @@ class Tab_PerfectSkin(QWidget):
         备份时间 = time.localtime()
         备份压缩文件名 = f'{输出文件名}_备份_{备份时间.tm_year}年{备份时间.tm_mon}月{备份时间.tm_mday}日{备份时间.tm_hour}时{备份时间.tm_min}分{备份时间.tm_sec}秒.bds'
         备份文件完整路径 = os.path.join(常量.皮肤输出路径, '皮肤备份文件', 备份压缩文件名)
-        备份命令 = f'''winrar a -afzip -ibck -r -ep1 "{备份文件完整路径}" "{皮肤源文件目录}/*"'''
+        压缩输入 = '*'
+        备份命令 = f'''7z a -y -r -tzip "{os.path.abspath(备份文件完整路径)}" "{压缩输入}"'''
         if not os.path.exists(os.path.dirname(备份文件完整路径)): os.makedirs(os.path.dirname(备份文件完整路径))
-        subprocess.run(备份命令, startupinfo=常量.subprocessStartUpInfo)
+        subprocess.run(备份命令, cwd=皮肤源文件目录, startupinfo=常量.subprocessStartUpInfo)
         os.startfile(os.path.dirname(备份文件完整路径))
 
 
