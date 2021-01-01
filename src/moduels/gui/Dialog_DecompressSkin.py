@@ -49,7 +49,7 @@ class Dialog_DecompressSkin(QDialog):
     def 确认(self):
         皮肤路径 = self.皮肤路径_HBox.路径输入框.text()
         解压目录 = self.解压目录_HBox.路径输入框.text()
-        subprocess.run(f'''7z x -y -tzip "{皮肤路径}" -aoa -o"{解压目录}" ''', startupinfo=常量.subprocessStartUpInfo)
+        subprocess.run(f'''winrar x -afzip -ibck -y "{皮肤路径}" "{解压目录 + '/'}"''', startupinfo=常量.subprocessStartUpInfo)
         os.startfile(解压目录)
         self.close()
 

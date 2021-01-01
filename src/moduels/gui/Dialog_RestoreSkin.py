@@ -54,15 +54,12 @@ class Dialog_RestoreSkin(QDialog):
 
     def 确认(self):
         if self.备份文件列表.currentRow() < 0: return
-        备份文件路径 = os.path.join(self.备份文件夹路径, self.备份文件列表.currentItem().text())
-        # 备份命令 = f'''winrar x -afzip -ibck -y "{}" "{self.皮肤源文件目录}"'''
-        备份命令 = f'''7z x -y -tzip "{备份文件路径}" -aoa -o"{self.皮肤源文件目录}" '''
+        备份命令 = f'''winrar x -afzip -ibck -y "{os.path.join(self.备份文件夹路径, self.备份文件列表.currentItem().text())}" "{self.皮肤源文件目录}"'''
         确认恢复 = QMessageBox.warning(self, '确认恢复', f'恢复将会使用 “{self.备份文件列表.currentItem().text()}” 文件的内容覆盖当前的皮肤源文件，当真要恢复？', QMessageBox.Yes | QMessageBox.Cancel,
                                    QMessageBox.Cancel)
         if 确认恢复 != QMessageBox.Yes:
             return False
         subprocess.run(备份命令, startupinfo=常量.subprocessStartUpInfo)
-        print(f'恢复完成：{备份文件路径}')
         self.close()
 
     def 取消(self):
